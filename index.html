@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Sajal Nauman — Electrical Engineering student at HITEC University, Taxila. Power electronics, embedded systems and circuit design portfolio.">
+<meta property="og:title" content="Sajal Nauman | Electrical Engineering Portfolio">
+<meta property="og:description" content="Power electronics, embedded systems and circuit design — from schematic to breadboard.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/photo.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%A1%3C/text%3E%3C/svg%3E">
+<title>Sajal Nauman | Electrical Engineering Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2F0E6;--ink:#262B21;--sage:#5C7A4C;--sage-deep:#38502E;--sage-mist:#E4E9DA;--bronze:#A9773F;
+  --surface:#FBFAF5;--muted:#6B6F5F;--border:rgba(38,43,33,.14);
+  --shadow:0 26px 54px -28px rgba(38,43,33,.35);
+  --display:'Fraunces',Georgia,serif;
+  --sans:'IBM Plex Sans',ui-sans-serif,system-ui,-apple-system,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#12150E;--ink:#EAE8DC;--sage:#8FB37A;--sage-deep:#B7D6A2;--sage-mist:rgba(143,179,122,.14);--bronze:#D2A468;
+    --surface:#191D14;--muted:#9CA18E;--border:rgba(255,255,255,.12);
+    --shadow:0 26px 54px -28px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#12150E;--ink:#EAE8DC;--sage:#8FB37A;--sage-deep:#B7D6A2;--sage-mist:rgba(143,179,122,.14);--bronze:#D2A468;
+  --surface:#191D14;--muted:#9CA18E;--border:rgba(255,255,255,.12);
+  --shadow:0 26px 54px -28px rgba(0,0,0,.7);
+}
+*,*::before,*::after{box-sizing:inherit;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:calc(84px + env(safe-area-inset-top,0px))}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.65;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:2;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+button{font:inherit;color:inherit;background:none;border:0}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+img{max-width:100%}
+h1,h2,h3{font-family:var(--display);line-height:1.12;font-weight:600}
+section{padding:100px 6vw}
+.wrap{max-width:1160px;margin:0 auto}
+h2{font-size:clamp(1.9rem,3.2vw,2.6rem);margin-bottom:40px}
+.muted{color:var(--muted)}
+.btn{display:inline-flex;align-items:center;padding:14px 28px;border-radius:100px;font-weight:600;font-size:.92rem;cursor:pointer;transition:transform .25s,box-shadow .25s;font-family:var(--sans)}
+.btn-primary{background:var(--sage-deep);color:var(--paper)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.btn-ghost{border:1px solid var(--border)}
+.btn-ghost:hover{border-color:var(--sage-deep);color:var(--sage-deep)}
+
+#welcome{position:fixed;inset:0;z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:var(--paper);transition:opacity .7s ease,visibility .7s;text-align:center;padding:20px}
+#welcome.done{opacity:0;visibility:hidden;pointer-events:none}
+#welcome svg{width:200px;height:60px;overflow:visible}
+#welcome path{fill:none;stroke:var(--sage-deep);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:360;stroke-dashoffset:360;animation:draw 1.5s ease forwards}
+#welcome circle{fill:var(--sage-deep);opacity:0;animation:fadein .4s ease 1.4s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+#welcome h1{font-size:1.8rem;opacity:0;animation:fadein .7s ease .6s forwards}
+#welcome p{font-family:var(--mono);color:var(--muted);font-size:.82rem;opacity:0;animation:fadein .7s ease .95s forwards}
+@keyframes fadein{to{opacity:1}}
+
+.nav{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:20px 6vw;background:var(--surface);border-bottom:1px solid var(--border)}
+.logo{font-family:var(--display);font-weight:600;font-size:1.15rem}
+.nav-links{display:flex;gap:30px}
+.nav-links a{font-size:.9rem;color:var(--muted);transition:color .2s}
+.nav-links a:hover{color:var(--sage-deep)}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:501}
+.nav-toggle span{width:24px;height:2px;background:var(--ink)}
+.nav-end{display:flex;align-items:center;gap:18px}
+.nav-social{display:flex;gap:10px}
+.nav-social a{width:32px;height:32px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-family:var(--mono);font-weight:600;color:var(--muted);transition:.2s}
+.nav-social a:hover{color:var(--sage-deep);border-color:var(--sage-deep)}
+@media(max-width:880px){
+  .nav-links{position:fixed;top:0;right:0;bottom:0;width:min(75vw,300px);background:var(--surface);flex-direction:column;justify-content:center;padding:0 42px;gap:26px;transform:translateX(100%);transition:transform .4s ease;box-shadow:var(--shadow)}
+  .nav-links.open{transform:translateX(0)}
+  .nav-toggle{display:flex}
+  .nav-social{display:none}
+}
+
+.side-nav{position:fixed;right:26px;top:50%;transform:translateY(-50%);z-index:400;display:flex;flex-direction:column;gap:14px}
+.side-dot{width:9px;height:9px;border-radius:50%;background:var(--border);position:relative;transition:.3s}
+.side-dot.active{background:var(--sage-deep);transform:scale(1.5)}
+.side-dot span{position:absolute;right:20px;top:50%;transform:translateY(-50%);white-space:nowrap;font-family:var(--mono);font-size:.7rem;background:var(--surface);border:1px solid var(--border);padding:4px 10px;border-radius:6px;opacity:0;pointer-events:none;transition:opacity .2s;color:var(--ink)}
+.side-dot:hover span{opacity:1}
+@media(max-width:1000px){.side-nav{display:none}}
+
+.to-top{position:fixed;right:24px;bottom:24px;width:46px;height:46px;border-radius:50%;background:var(--sage-deep);color:var(--paper);font-size:1.1rem;cursor:pointer;opacity:0;pointer-events:none;transform:translateY(10px);transition:.3s;z-index:400;box-shadow:var(--shadow)}
+.to-top.show{opacity:1;pointer-events:auto;transform:translateY(0)}
+
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:110px}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:50px;align-items:center;width:100%;opacity:0;animation:rise 1s ease 2.1s forwards}
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+.hero h1{font-size:clamp(2.4rem,5.2vw,4rem);margin-bottom:10px}
+.role{font-family:var(--mono);font-size:1.05rem;color:var(--sage-deep);margin-bottom:18px}
+.tagline{max-width:480px;color:var(--muted);margin-bottom:32px}
+.actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:46px}
+.stats{display:flex;gap:40px;flex-wrap:wrap}
+.stats b{display:block;font-family:var(--display);font-size:1.6rem;font-weight:600}
+.stats span{font-size:.78rem;color:var(--muted)}
+
+.cube-stage{perspective:1100px;height:260px;display:flex;align-items:center;justify-content:center;touch-action:none;cursor:grab}
+.cube-stage:active{cursor:grabbing}
+.cube{position:relative;width:170px;height:170px;transform-style:preserve-3d;transform:rotateX(-18deg) rotateY(0deg);animation:spin 22s linear infinite}
+.face{position:absolute;inset:0;border:1px solid var(--border);border-radius:16px;background-color:var(--surface);background-image:linear-gradient(155deg,var(--sage-mist),transparent 70%),linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:cover,18px 18px,18px 18px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:600;color:var(--sage-deep);box-shadow:var(--shadow)}
+.face.front{transform:translateZ(85px);background-image:url('assets/photo.jpg');background-size:cover;background-position:center top}
+.face.front::after{content:'Sajal Nauman';position:absolute;left:0;right:0;bottom:0;padding:10px 12px;font-family:var(--mono);font-weight:500;font-size:.6rem;color:#fff;background:linear-gradient(transparent,rgba(10,14,8,.68));border-radius:0 0 16px 16px;text-align:left}
+.face.back{transform:rotateY(180deg) translateZ(85px);font-family:var(--mono);font-size:1.1rem}
+.face.right{transform:rotateY(90deg) translateZ(85px);font-size:1.7rem}
+.face.left{transform:rotateY(-90deg) translateZ(85px);font-size:1.8rem}
+.face.top{transform:rotateX(90deg) translateZ(85px);font-family:var(--mono);font-size:1rem}
+.face.bottom{transform:rotateX(-90deg) translateZ(85px)}
+@keyframes spin{to{transform:rotateX(-18deg) rotateY(360deg)}}
+.hint{text-align:center;font-size:.78rem;color:var(--muted);margin-top:16px}
+@media(max-width:880px){.hero-grid{grid-template-columns:1fr;text-align:center}.actions,.stats{justify-content:center}.cube-stage{height:220px}}
+
+.about-grid{display:grid;grid-template-columns:1.3fr .9fr;gap:60px}
+.about-grid p{color:var(--muted);margin-bottom:20px;max-width:60ch}
+.facts li{padding:12px 0;border-bottom:1px solid var(--border);font-size:.94rem}
+.facts li:last-child{border-bottom:none}
+.facts b{font-family:var(--mono);font-size:.78rem;color:var(--sage-deep);display:block;margin-bottom:4px}
+.tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.tag{padding:8px 16px;border-radius:100px;background:var(--sage-mist);font-size:.82rem;color:var(--sage-deep)}
+@media(max-width:880px){.about-grid{grid-template-columns:1fr}}
+
+.timeline{position:relative;padding-left:34px;border-left:2px solid var(--sage-mist)}
+.t-item{position:relative;padding-bottom:46px}
+.t-item:last-child{padding-bottom:0}
+.t-item::before{content:'';position:absolute;left:-41px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--sage-deep);border:3px solid var(--paper)}
+.t-item h3{font-size:1.2rem;margin-bottom:4px}
+.t-org{color:var(--sage-deep);font-size:.92rem;margin-bottom:2px}
+.t-meta{font-size:.86rem;color:var(--muted);margin-bottom:14px}
+.t-stat{display:flex;align-items:baseline;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.t-stat b{font-family:var(--mono);font-size:1.3rem;color:var(--ink);font-weight:600}
+.t-stat b span{font-size:.9rem;color:var(--muted);font-weight:500}
+.t-stat>span{font-size:.85rem;color:var(--muted)}
+.badge{display:inline-block;padding:5px 14px;border-radius:100px;font-size:.76rem;font-weight:600;background:var(--sage-mist);color:var(--sage-deep)}
+.badge.gold{background:rgba(169,119,63,.16);color:var(--bronze)}
+
+.mini-cube-stage{perspective:600px;width:72px;height:72px;margin:0 auto 40px}
+.mini-cube{position:relative;width:72px;height:72px;transform-style:preserve-3d;animation:mspin 16s linear infinite;transform:rotateX(-15deg)}
+.mf{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 4px;background:var(--sage-mist);border:1px solid var(--border);border-radius:9px;font-family:var(--mono);font-size:.6rem;font-weight:600;color:var(--sage-deep)}
+.mf-a{transform:translateZ(36px)}
+.mf-b{transform:rotateY(180deg) translateZ(36px)}
+.mf-c{transform:rotateY(90deg) translateZ(36px)}
+.mf-d{transform:rotateY(-90deg) translateZ(36px)}
+.mf-e{transform:rotateX(90deg) translateZ(36px)}
+.mf-f{transform:rotateX(-90deg) translateZ(36px)}
+@keyframes mspin{to{transform:rotateX(-15deg) rotateY(360deg)}}
+.skill-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:44px}
+.skill-cols h3{font-family:var(--mono);font-weight:500;font-size:.85rem;color:var(--muted);margin-bottom:16px}
+@media(max-width:880px){.skill-cols{grid-template-columns:1fr;gap:32px}}
+
+.slider{position:relative;overflow:hidden;border-radius:22px;border:1px solid var(--border);background:var(--surface)}
+.slider-track{display:flex;transition:transform .5s ease}
+.slide{min-width:100%;padding:44px;display:grid;grid-template-columns:1.3fr 1fr;gap:32px;align-items:start}
+.slide h3{font-size:1.35rem;margin-bottom:20px;grid-column:1/-1}
+.slide-media img{width:100%;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow)}
+@media(max-width:760px){.slide{grid-template-columns:1fr}}
+.flow{display:flex;flex-wrap:wrap;align-items:center;row-gap:12px;margin-bottom:24px}
+.flow-step{background:var(--sage-mist);color:var(--sage-deep);font-family:var(--mono);font-size:.76rem;padding:10px 14px;border-radius:9px}
+.flow-arrow{color:var(--sage);padding:0 8px}
+.slide p{color:var(--muted);max-width:70ch}
+.slide>.a-cat{grid-column:1/-1;justify-self:start}
+.slide-media img{transition:transform .45s ease}
+.slide-media:hover img{transform:scale(1.03)}
+.slider-nav{display:flex;align-items:center;justify-content:center;gap:18px;padding:18px 0 0}
+.s-arrow{width:38px;height:38px;border-radius:50%;border:1px solid var(--border);cursor:pointer;font-size:1rem}
+.dots{display:flex;gap:8px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--muted);opacity:.4;cursor:pointer;transition:.3s}
+.dot.active{opacity:1;background:var(--sage-deep);width:22px;border-radius:6px}
+.more-list{margin-top:22px}
+.more-list li{display:flex;align-items:center;gap:20px;padding:20px 0;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.more-list li:last-child{border-bottom:none}
+.more-list li{transition:transform .25s ease}
+.more-list li:hover{transform:translateX(6px)}
+.more-list .mp-thumb{transition:transform .4s ease}
+.more-list li:hover .mp-thumb{transform:scale(1.08)}
+.more-list .mp-text{flex:1;min-width:200px}
+.more-list h4{font-size:1rem;font-weight:600}
+.more-list p{color:var(--muted);font-size:.9rem}
+.mp-thumb{width:64px;height:64px;object-fit:cover;border-radius:10px;flex-shrink:0;box-shadow:var(--shadow)}
+@media(max-width:600px){.slide{padding:26px}}
+
+.coin-stage{perspective:500px;width:58px;height:58px;margin:0 auto 34px}
+.coin{position:relative;width:58px;height:58px;transform-style:preserve-3d;animation:cspin 5s linear infinite}
+.cf{position:absolute;inset:0;border-radius:50%;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 35% 30%,var(--sage-mist),var(--sage-deep) 78%);color:var(--paper);font-family:var(--display);font-weight:600;font-size:1.05rem;box-shadow:var(--shadow);backface-visibility:hidden}
+.cf-front{transform:translateZ(1px)}
+.cf-back{transform:rotateY(180deg) translateZ(1px)}
+@keyframes cspin{to{transform:rotateY(360deg)}}
+.a-cat{display:inline-block;font-family:var(--mono);font-size:.7rem;color:var(--sage-deep);background:var(--sage-mist);padding:3px 9px;border-radius:5px;margin-bottom:9px}
+.award-list li,.lead-list li{padding:18px 0;border-bottom:1px solid var(--border)}
+.award-list li.has-img{display:flex;gap:18px;align-items:center}
+.award-list li.has-img img{width:64px;height:64px;object-fit:cover;border-radius:12px;flex-shrink:0;box-shadow:var(--shadow)}
+.award-list li.has-img .a-cat{margin-bottom:5px}
+.img-pair{display:flex;gap:6px;flex-shrink:0}
+.award-list li.has-img .img-pair img{width:54px;height:54px}
+.award-list li:last-child,.lead-list li:last-child{border-bottom:none}
+.award-list h4,.lead-list h4{font-size:.98rem;margin-bottom:3px}
+.award-list p,.lead-list p{font-size:.87rem;color:var(--muted)}
+h3.sub{font-family:var(--mono);font-weight:500;font-size:.9rem;color:var(--muted);margin:52px 0 6px}
+
+.contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:start}
+.contact-grid p{color:var(--muted);max-width:44ch;margin-top:14px}
+.contact-list li{padding:16px 0;border-bottom:1px solid var(--border)}
+.contact-list li:last-child{border-bottom:none}
+.contact-list b{display:block;font-size:.78rem;color:var(--muted);margin-bottom:4px;font-weight:500}
+.contact-list span,.contact-list a{font-family:var(--mono);font-size:1rem}
+.contact-list a:hover{color:var(--sage-deep)}
+@media(max-width:880px){.contact-grid{grid-template-columns:1fr}}
+
+footer{padding:34px 6vw;text-align:center;color:var(--muted);font-size:.82rem;border-top:1px solid var(--border);font-family:var(--mono)}
+
+@media(prefers-reduced-motion:reduce){
+  .cube{animation:none}
+  .hero-grid{animation:none;opacity:1;transform:none}
+  #welcome path{animation:none;stroke-dashoffset:0}
+  #welcome circle{animation:none;opacity:1}
+  #welcome h1,#welcome p{animation:none;opacity:1}
+}
+</style>
+</head>
+<body>
+
+<div id="welcome">
+  <svg viewBox="0 0 210 60"><path d="M6 42 H50 V16 H100 V42 H150 V26 H204"/><circle cx="6" cy="42" r="4"></circle><circle cx="204" cy="26" r="4"></circle></svg>
+  <h1>Sajal Nauman</h1>
+  <p>Electrical Engineering Portfolio</p>
+</div>
+
+<nav class="nav">
+  <div class="logo">Sajal Nauman</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-end">
+    <div class="nav-social">
+      <a href="https://www.linkedin.com/in/sajal-nauman-9ba4b7281" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+      <a href="mailto:sajalnauman8@gmail.com" aria-label="Email">✉</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<nav class="side-nav" id="sideNav" aria-label="Section navigation">
+  <a href="#home" class="side-dot active" data-sec="home"><span>Home</span></a>
+  <a href="#about" class="side-dot" data-sec="about"><span>About</span></a>
+  <a href="#education" class="side-dot" data-sec="education"><span>Education</span></a>
+  <a href="#skills" class="side-dot" data-sec="skills"><span>Skills</span></a>
+  <a href="#projects" class="side-dot" data-sec="projects"><span>Projects</span></a>
+  <a href="#achievements" class="side-dot" data-sec="achievements"><span>Achievements</span></a>
+  <a href="#contact" class="side-dot" data-sec="contact"><span>Contact</span></a>
+</nav>
+
+<button class="to-top" id="toTop" aria-label="Back to top">↑</button>
+
+<main>
+<section id="home" class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Sajal Nauman</h1>
+      <div class="role">Electrical Engineering Student</div>
+      <p class="tagline">Fifth-semester EE student at HITEC University, Taxila, working across power electronics, embedded systems and circuit design — from schematic to breadboard.</p>
+      <div class="actions">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+      </div>
+      <div class="stats">
+        <div><b><span class="cnt" data-target="3.99" data-decimals="2">0</span>/4.0</b><span>CGPA</span></div>
+        <div><b><span class="cnt" data-target="9">0</span></b><span>Projects</span></div>
+        <div><b><span class="cnt" data-target="10">0</span>+</b><span>Honors</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="cube-stage" id="cubeStage">
+        <div class="cube" id="cube">
+          <div class="face front"></div>
+          <div class="face back">EE</div>
+          <div class="face right">⚡</div>
+          <div class="face left">SN</div>
+          <div class="face top">3.99</div>
+          <div class="face bottom"></div>
+        </div>
+      </div>
+      <p class="hint">Drag to rotate</p>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div>
+      <h2>About</h2>
+      <p>I'm a fifth-semester Electrical Engineering student at HITEC University, Taxila, currently holding a 3.99/4.0 CGPA. My interest sits at the intersection of power electronics, embedded systems and circuit design — I like carrying an idea from schematic to a working breadboard build, then simulating and refining it in PSpice and Proteus.</p>
+      <p>Beyond the lab, I spend time on creative lettering, baking and graphic design — engineering and design reward the same patience for getting details right.</p>
+      <div class="tags">
+        <span class="tag">Creative Lettering</span>
+        <span class="tag">Baking & Culinary Arts</span>
+        <span class="tag">Reading</span>
+        <span class="tag">Graphic Design</span>
+      </div>
+    </div>
+    <ul class="facts">
+      <li><b>University</b>HITEC University, Taxila</li>
+      <li><b>Location</b>Wah Cantt, Pakistan</li>
+      <li><b>Languages</b>Urdu (native), English (proficient)</li>
+      <li><b>Currently</b>5th semester, BS Electrical Engineering</li>
+    </ul>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <h2>Education</h2>
+    <div class="timeline">
+      <div class="t-item">
+        <h3>BS Electrical Engineering</h3>
+        <p class="t-org">HITEC University, Taxila</p>
+        <p class="t-meta">Sep 2024 – Present, 5th semester</p>
+        <div class="t-stat"><b>3.99<span>/4.0</span></b><span>CGPA</span></div>
+      </div>
+      <div class="t-item">
+        <h3>FSc Pre-Engineering</h3>
+        <p class="t-org">Federal Board, FBISE</p>
+        <p class="t-meta">2022 – 2024</p>
+        <div class="t-stat"><b>989<span>/1100</span></b><span>Highest aggregate in college</span></div>
+        <span class="badge">Bronze Medalist</span>
+      </div>
+      <div class="t-item">
+        <h3>Matriculation, Science</h3>
+        <p class="t-org">Federal Board, FBISE</p>
+        <p class="t-meta">2020 – 2022</p>
+        <div class="t-stat"><b>1060<span>/1100</span></b><span>96% overall</span></div>
+        <span class="badge gold">Gold Medalist</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <h2>Skills & Tools</h2>
+    <div class="mini-cube-stage" aria-hidden="true">
+      <div class="mini-cube">
+        <div class="mf mf-a">C++</div>
+        <div class="mf mf-b">Py</div>
+        <div class="mf mf-c">PCB</div>
+        <div class="mf mf-d">MATLAB</div>
+        <div class="mf mf-e">Proteus</div>
+        <div class="mf mf-f">CAD</div>
+      </div>
+    </div>
+    <div class="skill-cols">
+      <div><h3>Programming</h3><div class="tags"><span class="tag">C++</span><span class="tag">Python</span></div></div>
+      <div><h3>Simulation & Design</h3><div class="tags"><span class="tag">PSpice</span><span class="tag">Proteus</span><span class="tag">MATLAB</span><span class="tag">AutoCAD</span><span class="tag">PCB Design</span></div></div>
+      <div><h3>Creative & Office</h3><div class="tags"><span class="tag">Canva</span><span class="tag">CapCut</span><span class="tag">MS Office</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <h2>Featured Projects</h2>
+    <div class="slider">
+      <div class="slider-track" id="projTrack">
+        <div class="slide">
+          <span class="a-cat">Power Electronics</span>
+          <h3>30W USB Fast Charger (SMPS)</h3>
+          <div class="slide-body">
+            <div class="flow">
+              <span class="flow-step">AC Input</span><span class="flow-arrow">→</span>
+              <span class="flow-step">Bridge Rectifier & Filter</span><span class="flow-arrow">→</span>
+              <span class="flow-step">PWM Switching, TL494</span><span class="flow-arrow">→</span>
+              <span class="flow-step">Isolation Transformer</span><span class="flow-arrow">→</span>
+              <span class="flow-step">Rectify & Regulate, LM2596</span><span class="flow-arrow">→</span>
+              <span class="flow-step">5V / 6A Output</span>
+            </div>
+            <p>A switch-mode supply that steps 220V AC mains down to a regulated 5V rail at up to 6A. The TL494 controller drives a MOSFET at high frequency, keeping the transformer small while still delivering a full 30W efficiently — the same principle behind compact modern fast chargers.</p>
+          </div>
+          <div class="slide-media"><img src="assets/proj-smps-charger.jpg" alt="30W SMPS charger circuit schematic"></div>
+        </div>
+        <div class="slide">
+          <span class="a-cat">Power Electronics</span>
+          <h3>5V DC Regulated Power Supply</h3>
+          <div class="slide-body">
+            <div class="flow">
+              <span class="flow-step">AC Input</span><span class="flow-arrow">→</span>
+              <span class="flow-step">Step-Down Transformer</span><span class="flow-arrow">→</span>
+              <span class="flow-step">Bridge Rectifier</span><span class="flow-arrow">→</span>
+              <span class="flow-step">Smoothing Capacitor</span><span class="flow-arrow">→</span>
+              <span class="flow-step">7805 Regulator</span><span class="flow-arrow">→</span>
+              <span class="flow-step">5V Output + LED</span>
+            </div>
+            <p>A classic linear supply: the transformer steps mains voltage down, a bridge rectifier converts it to pulsating DC, a 2200µF capacitor smooths the ripple, and a 7805 regulator locks the output to a clean, stable 5V — confirmed by an onboard LED indicator.</p>
+          </div>
+          <div class="slide-media"><img src="assets/proj-5v-supply.jpg" alt="5V DC regulated power supply circuit schematic"></div>
+        </div>
+        <div class="slide">
+          <span class="a-cat">Digital Logic</span>
+          <h3>Digital Dice Roller</h3>
+          <div class="slide-body">
+            <div class="flow">
+              <span class="flow-step">Push Button</span><span class="flow-arrow">→</span>
+              <span class="flow-step">555 Astable Clock</span><span class="flow-arrow">→</span>
+              <span class="flow-step">4017 Decade Counter</span><span class="flow-arrow">→</span>
+              <span class="flow-step">Diode Pattern Encoder</span><span class="flow-arrow">→</span>
+              <span class="flow-step">4511 BCD-7Seg Driver</span><span class="flow-arrow">→</span>
+              <span class="flow-step">7-Segment Display</span>
+            </div>
+            <p>Holding the button feeds a fast clock from a 555 timer into a 4017 counter, cycling through its ten outputs many times a second. A diode network maps those states onto valid dice faces, and a 4511 decoder latches the result onto the display the instant the button is released — then built and tested on breadboard, shown here.</p>
+          </div>
+          <div class="slide-media"><img src="assets/proj-dice-breadboard.jpg" alt="Digital dice roller circuit built and tested on breadboard"></div>
+        </div>
+        <div class="slide">
+          <span class="a-cat">Digital Logic</span>
+          <h3>Elevator Floor Control System</h3>
+          <div class="slide-body">
+            <div class="flow">
+              <span class="flow-step">Floor Request, Switches</span><span class="flow-arrow">→</span>
+              <span class="flow-step">74LS174 Register</span><span class="flow-arrow">→</span>
+              <span class="flow-step">74LS85 Comparator</span><span class="flow-arrow">→</span>
+              <span class="flow-step">Floor Reached</span><span class="flow-arrow">→</span>
+              <span class="flow-step">AND Gate</span><span class="flow-arrow">→</span>
+              <span class="flow-step">Arrival Bell</span>
+            </div>
+            <p>A requested floor set on input switches is latched into a 74LS174 register and shown on one display, standing in for the call button press. Separately, AND/OR/NOT gate logic clocks a 74LS190 counter that steadily cycles through floor values on a second display, modeling the car's current position. A 74LS85 magnitude comparator continuously checks the requested floor against the current one, and the instant they match, an AND gate trips the arrival bell — a simplified digital model of how a controller decides exactly when to stop at the floor you asked for.</p>
+          </div>
+          <div class="slide-media"><img src="assets/proj-elevator.jpg" alt="Elevator floor control circuit schematic with register, counter and comparator"></div>
+        </div>
+      </div>
+    </div>
+    <div class="slider-nav">
+      <button class="s-arrow" id="pPrev" aria-label="Previous project">←</button>
+      <div class="dots" id="pDots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+      <button class="s-arrow" id="pNext" aria-label="Next project">→</button>
+    </div>
+    <ul class="more-list">
+      <li><img class="mp-thumb" src="assets/proj-voice.jpg" alt="Voice signal analysis plots from MATLAB"><div class="mp-text"><span class="a-cat">Signal Processing</span><h4>Voice Analyzer, MATLAB</h4><p>Signal-processing tool analyzing voice waveforms and frequency content.</p></div></li>
+      <li><img class="mp-thumb" src="assets/proj-dtmf.jpg" alt="Generated DTMF signal waveform"><div class="mp-text"><span class="a-cat">Signal Processing</span><h4>DTMF Generator & Detector</h4><p>Generates and decodes dual-tone multi-frequency signals used in telephony.</p></div></li>
+      <li><img class="mp-thumb" src="assets/proj-eq-filter.jpg" alt="Three-band audio equalizer and filter circuit with simulated frequency response"><div class="mp-text"><span class="a-cat">Analog Filters</span><h4>Audio Signal Conditioning, Proteus</h4><p>A 3-band EQ with 80 Hz/160 Hz high-pass and 130 kHz low-pass stages, tuned against the simulated frequency response.</p></div></li>
+      <li><img class="mp-thumb" src="assets/proj-airport-system.jpg" alt="Airport management system console app showing the flight schedule and booking flow"><div class="mp-text"><span class="a-cat">Data Structures</span><h4>Airport Management System, C++</h4><p>Menu-driven flight booking console app processing check-ins through a queue and cancellation history through a stack.</p></div></li>
+      <li><img class="mp-thumb" src="assets/proj-tictactoe.jpg" alt="Tic-tac-toe console game ending in a draw"><div class="mp-text"><span class="a-cat">Programming</span><h4>Tic-Tac-Toe Game, C++</h4><p>Two-player console game with full win, loss and draw detection across rows, columns and diagonals.</p></div></li>
+    </ul>
+  </div>
+</section>
+
+<section id="achievements">
+  <div class="wrap">
+    <h2>Achievements & Certifications</h2>
+    <div class="coin-stage" aria-hidden="true">
+      <div class="coin">
+        <div class="cf cf-front">✦</div>
+        <div class="cf cf-back">SN</div>
+      </div>
+    </div>
+    <ul class="award-list">
+      <li class="has-img"><div class="img-pair"><img src="assets/medal-1040.jpg" alt="Medal awarded to Sajal Nauman for crossing 1040 marks"><img src="assets/medal-ssc.jpg" alt="Quality School and College gold medal for SSC 2020-2022"></div><div><span class="a-cat">Medal</span><h4>Gold Medalist, Matriculation</h4><p>FBISE — 96% overall, 1060/1100</p></div></li>
+      <li class="has-img"><img src="assets/medal-hssc.jpg" alt="Quality School and College medal for HSSC 2022-2024"><div><span class="a-cat">Medal</span><h4>Bronze Medalist, FSc Pre-Engineering</h4><p>FBISE — 989/1100, highest aggregate in college</p></div></li>
+      <li class="has-img"><img src="assets/medal-bronze.jpg" alt="Bronze medal from the International Kangaroo Mathematics Contest"><div><span class="a-cat">Medal</span><h4>Bronze Medal, IKMC 2019</h4><p>International Kangaroo Mathematics Contest</p></div></li>
+      <li><span class="a-cat">Competition</span><h4>IKMC Participant</h4><p>2016, Ecolier level, and 2018, Benjamin level</p></li>
+      <li><span class="a-cat">Certificate</span><h4>Foundations: Data, Data, Everywhere</h4><p>Google, via Coursera — 2026</p></li>
+      <li><span class="a-cat">Certificate</span><h4>AI Fundamentals</h4><p>Google, via Coursera — 2026</p></li>
+      <li><span class="a-cat">Seminar</span><h4>Robotics and AI in Healthcare</h4><p>CPD seminar, HITEC University — 2024</p></li>
+      <li><span class="a-cat">Seminar</span><h4>The Cybersecurity Revolution</h4><p>0.5 CPD points seminar — 2025</p></li>
+      <li><span class="a-cat">Competition</span><h4>Research Competition Winner</h4><p>READ Pakistan HITEC — "The Critical Edge," 2026</p></li>
+    </ul>
+
+    <h3 class="sub">Leadership & Involvement</h3>
+    <ul class="lead-list">
+      <li><h4>Event Volunteer, HI-ROBOTEC</h4><p>HITEC University — décor team, event planning and execution</p></li>
+      <li><h4>5Es Lead</h4><p>YPDC, HITEC Chapter</p></li>
+      <li><h4>Head Technical</h4><p>IEEE-PSYWSC</p></li>
+      <li><h4>Head of Registration</h4><p>Advisory Committee, READ Pakistan HITEC Chapter</p></li>
+    </ul>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <h2>Let's Talk</h2>
+      <p>Open to internships, collaborations, and interesting problems in power electronics and embedded systems.</p>
+      <div class="actions" style="margin-top:28px">
+        <a href="https://www.linkedin.com/in/sajal-nauman-9ba4b7281" target="_blank" rel="noopener" class="btn btn-primary">LinkedIn</a>
+        <a href="mailto:sajalnauman8@gmail.com" class="btn btn-ghost">Email</a>
+      </div>
+    </div>
+    <ul class="contact-list">
+      <li><b>Personal Email</b><a href="mailto:sajalnauman8@gmail.com">sajalnauman8@gmail.com</a></li>
+      <li><b>University Email</b><a href="mailto:24-ee-027@student.hitecuni.edu.pk">24-ee-027@student.hitecuni.edu.pk</a></li>
+      <li><b>Phone</b><a href="tel:+923195682799">0319-5682799</a></li>
+      <li><b>Location</b><span>Wah Cantt, Pakistan</span></li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer>© 2026 Sajal Nauman</footer>
+
+<script>
+try{
+  var w=document.getElementById('welcome');
+  function dismissWelcome(){ if(w && !w.classList.contains('done')){ w.classList.add('done'); } }
+  setTimeout(dismissWelcome,2500);
+  if(w) w.addEventListener('click',dismissWelcome);
+}catch(e){}
+
+try{
+  var navToggle=document.getElementById('navToggle'), navLinks=document.getElementById('navLinks');
+  if(navToggle && navLinks){
+    navToggle.addEventListener('click',function(){navLinks.classList.toggle('open')});
+    navLinks.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){navLinks.classList.remove('open')})});
+  }
+}catch(e){}
+
+try{
+  var cube=document.getElementById('cube'), stage=document.getElementById('cubeStage');
+  if(cube && stage){
+    var rotY=0, rotX=-18, dragging=false, lastX=0, lastY=0;
+    var applyRot=function(){ cube.style.transform='rotateX('+rotX+'deg) rotateY('+rotY+'deg)'; };
+    stage.addEventListener('pointerdown',function(e){ dragging=true; lastX=e.clientX; lastY=e.clientY; cube.style.animation='none'; try{stage.setPointerCapture(e.pointerId);}catch(err){} });
+    stage.addEventListener('pointermove',function(e){ if(!dragging)return; rotY+=(e.clientX-lastX)*0.5; rotX=Math.max(-70,Math.min(70,rotX-(e.clientY-lastY)*0.3)); lastX=e.clientX; lastY=e.clientY; applyRot(); });
+    window.addEventListener('pointerup',function(){dragging=false});
+  }
+}catch(e){}
+
+try{
+  var track=document.getElementById('projTrack');
+  var dots=document.querySelectorAll('#pDots .dot');
+  var slides=track?track.querySelectorAll('.slide'):[];
+  var idx=0;
+  if(track && slides.length){
+    var goSlide=function(i){ idx=(i+slides.length)%slides.length; track.style.transform='translateX(-'+(idx*100)+'%)'; dots.forEach(function(d,j){d.classList.toggle('active',j===idx)}); };
+    var pPrev=document.getElementById('pPrev'), pNext=document.getElementById('pNext');
+    if(pPrev) pPrev.addEventListener('click',function(){goSlide(idx-1)});
+    if(pNext) pNext.addEventListener('click',function(){goSlide(idx+1)});
+    dots.forEach(function(d,j){d.addEventListener('click',function(){goSlide(j)})});
+    var sx=0;
+    track.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
+    track.addEventListener('touchend',function(e){ var dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>40) goSlide(idx+(dx<0?1:-1)); },{passive:true});
+  }
+}catch(e){}
+
+try{
+  var sideDots=document.querySelectorAll('.side-dot');
+  var mainSections=document.querySelectorAll('main section[id]');
+  if(sideDots.length && mainSections.length && 'IntersectionObserver' in window){
+    var secIO=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          var id=en.target.id;
+          sideDots.forEach(function(d){ d.classList.toggle('active', d.getAttribute('data-sec')===id); });
+        }
+      });
+    },{rootMargin:'-45% 0px -45% 0px'});
+    mainSections.forEach(function(s){ secIO.observe(s); });
+  }
+}catch(e){}
+
+try{
+  var toTop=document.getElementById('toTop');
+  if(toTop){
+    window.addEventListener('scroll',function(){ toTop.classList.toggle('show', window.scrollY>600); },{passive:true});
+    toTop.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+  }
+}catch(e){}
+
+try{
+  var counters=document.querySelectorAll('.cnt');
+  var reduceMotion=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(counters.length){
+    if(reduceMotion){
+      counters.forEach(function(el){ var t=parseFloat(el.getAttribute('data-target')); var d=parseInt(el.getAttribute('data-decimals')||'0',10); el.textContent = d ? t.toFixed(d) : t; });
+    } else {
+      setTimeout(function(){
+        counters.forEach(function(el){
+          var target=parseFloat(el.getAttribute('data-target'));
+          var decimals=parseInt(el.getAttribute('data-decimals')||'0',10);
+          var dur=1200, start=null;
+          function step(ts){
+            if(!start) start=ts;
+            var p=Math.min((ts-start)/dur,1);
+            var val=target*p;
+            el.textContent = decimals ? val.toFixed(decimals) : Math.round(val);
+            if(p<1) requestAnimationFrame(step); else el.textContent = decimals ? target.toFixed(decimals) : target;
+          }
+          requestAnimationFrame(step);
+        });
+      },2400);
+    }
+  }
+}catch(e){}
+</script>
+</body>
+</html>
